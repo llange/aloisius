@@ -41,9 +41,10 @@ class Stack(object):
     def __init__(self, **kwargs):
         self.outputs = FutureOutputs(self)
         self._future = self._executor.submit(self._execute, **kwargs)
+        self._future.result()
 
     def __del__(self):
-        self._future.result()
+        pass
             
     def _execute(self, **kwargs):
         kwargs['TargetState'] = kwargs['TargetState'] or 'present'
